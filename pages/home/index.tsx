@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { FaSearch } from "react-icons/fa";
 import Swal from 'sweetalert2';
-import { checkRepositoryExists } from '../../services/apiService';
+import { checkRepositoryExists } from '../../src/services/apiService';
 
 const Home: React.FC = () => {
   const [username, setUsername] = useState<string>('');
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleSearch = async () => {
     if (username.trim()) {
       const repoExists = await checkRepositoryExists(username);
 
       if (repoExists) {
-        navigate(`/profile/${username}`);
+        router.push(`/profile/${username}`); 
       } else {
         Swal.fire("Repositório não encontrado!");
       }

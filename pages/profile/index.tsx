@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
-import { getUserData, getUserRepos } from '../../api/githubService';
-import ProfileSidebar from '../../components/Profile/ProfileSidebar';
-import ProfileContent from '../../components/Profile/ProfileContent';
+import { useRouter } from 'next/router'
+import { getUserData, getUserRepos } from '../../src/api/githubService';
+import ProfileSidebar from '../../src/components/Profile/ProfileSidebar';
+import ProfileContent from '../../src/components/Profile/ProfileContent';
 
 interface UserData {
   avatar_url: string;
@@ -28,7 +28,8 @@ interface Repository {
 }
 
 const Profile: React.FC = () => {
-  const { username } = useParams<{ username: string }>();
+  const router = useRouter(); 
+  const { username } = router.query; // Obtendo o parâmetro `username` da URL
   const [userData, setUserData] = useState<UserData | null>(null);
   const [repos, setRepos] = useState<Repository[]>([]);
 
@@ -37,7 +38,7 @@ const Profile: React.FC = () => {
       if (!username) return;
 
       try {
-        const user = await getUserData(username);
+        const user = await getUserData(username as string);
         
         const userWithUsername: UserData = { 
           avatar_url: user.avatar_url,
@@ -53,7 +54,7 @@ const Profile: React.FC = () => {
           twitter_username: user.twitter_username,
         };
 
-        const repositories = await getUserRepos(username);
+        const repositories = await getUserRepos(username as string);
         setUserData(userWithUsername);
         setRepos(repositories.sort((a, b) => b.stargazers_count - a.stargazers_count));
       } catch (error) {
@@ -65,7 +66,7 @@ const Profile: React.FC = () => {
   }, [username]);
 
   if (!username) {
-    return <Navigate to="/" />; 
+    return <div>Erro: Usuário não encontrado!</div>;
   }
 
   if (!userData) {
@@ -79,7 +80,7 @@ const Profile: React.FC = () => {
   return (
     <div className="flex flex-col md:flex-row bg-[#353739] font-condensed md:h-screen">
       <div className="md:w-1/3 md:max-h-full">
-        <ProfileSidebar userData={userData} username={username} />
+        <ProfileSidebar userData={userData} username={username as string} />
       </div>
       <div className="flex-1 p-4 overflow-y-auto">
         <ProfileContent repos={repos} />

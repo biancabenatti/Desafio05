@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link'; // Link do Next.js
 import { FaRegHeart, FaRegStar } from "react-icons/fa";
 import { IoLocationOutline, IoPeopleOutline } from 'react-icons/io5';
 import { GoOrganization } from "react-icons/go";
@@ -7,7 +7,6 @@ import { MdOutlineAlternateEmail } from 'react-icons/md';
 import { CgWebsite } from 'react-icons/cg';
 import { BsTwitterX } from 'react-icons/bs';
 
-// Definindo um tipo para os dados do usuário
 interface UserData {
   avatar_url: string;
   name?: string;
@@ -28,7 +27,7 @@ interface ProfileSidebarProps {
 }
 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ userData, username }) => {
-  const [totalStars, setTotalStars] = useState<number>(0); // Tipando o estado totalStars
+  const [totalStars, setTotalStars] = useState<number>(0); 
 
   useEffect(() => {
     const fetchTotalStars = async () => {
@@ -79,7 +78,12 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ userData, username }) =
           )}
         </div>
         <div className="flex justify-center">
-          <Link to="/" className="flex justify-center items-center p-2 h-12 mt-2 bg-zinc-950 text-slate-100 rounded-lg cursor-pointer text-lg hover:bg-black w-full">Voltar</Link>
+          {/* Usando o Link do Next.js */}
+          <Link href="/" passHref>
+            <a className="flex justify-center items-center p-2 h-12 mt-2 bg-zinc-950 text-slate-100 rounded-lg cursor-pointer text-lg hover:bg-black w-full">
+              Voltar
+            </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ interface RepoItemProps {
   repo: Repository;
 }
 
-const RepoItem: React.FC<RepoItemProps> = ({ repo }) => {
+const RepoItem: React.FC<RepoItemProps> = React.memo(({ repo }) => {
   return (
     <li className="mb-4 p-4 rounded-lg flex flex-col justify-start backdrop-blur-3xl border-t-gray-700 border-t-2 shadow-2xl">
       <a 
@@ -35,6 +35,6 @@ const RepoItem: React.FC<RepoItemProps> = ({ repo }) => {
       </div>
     </li>
   );
-};
+});
 
 export default RepoItem;

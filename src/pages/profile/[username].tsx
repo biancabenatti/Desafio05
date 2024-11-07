@@ -1,9 +1,9 @@
 // pages/profile/[username].tsx
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getUserData, getUserRepos } from '../../src/api/githubService';
-import ProfileSidebar from '../../src/components/Profile/ProfileSidebar';
-import ProfileContent from '../../src/components/Profile/ProfileContent';
+import { getUserData, getUserRepos } from '../../api/githubService';
+import ProfileSidebar from '../../components/Profile/ProfileSidebar';
+import ProfileContent from '../../components/Profile/ProfileContent';
 
 interface UserData {
   avatar_url: string;

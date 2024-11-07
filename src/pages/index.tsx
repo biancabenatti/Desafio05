@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FaSearch } from "react-icons/fa";
 import Swal from 'sweetalert2';
-import { checkRepositoryExists } from '../src/services/apiService';
+import { checkRepositoryExists } from '../services/apiService';
 
 const Home: React.FC = () => {
   const [username, setUsername] = useState<string>('');

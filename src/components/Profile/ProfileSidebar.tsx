@@ -27,7 +27,7 @@ interface ProfileSidebarProps {
 }
 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ userData, username }) => {
-  const [totalStars, setTotalStars] = useState<number>(0); 
+  const [totalStars, setTotalStars] = useState<number>(0);
 
   useEffect(() => {
     const fetchTotalStars = async () => {
@@ -80,10 +80,11 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ userData, username }) =
         <div className="flex justify-center">
           {/* Usando o Link do Next.js */}
           <Link href="/" passHref>
-            <a className="flex justify-center items-center p-2 h-12 mt-2 bg-zinc-950 text-slate-100 rounded-lg cursor-pointer text-lg hover:bg-black w-full">
+            <span className="flex justify-center items-center p-2 h-12 mt-2 bg-zinc-950 text-slate-100 rounded-lg cursor-pointer text-lg hover:bg-black w-full">
               Voltar
-            </a>
+            </span>
           </Link>
+
         </div>
       </div>
     </div>

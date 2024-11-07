@@ -1,13 +1,14 @@
+// pages/profile/[username].tsx
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { getUserData, getUserRepos } from '../../src/api/githubService';
 import ProfileSidebar from '../../src/components/Profile/ProfileSidebar';
 import ProfileContent from '../../src/components/Profile/ProfileContent';
 
 interface UserData {
   avatar_url: string;
-  name?: string; 
-  username: string; 
+  name?: string;
+  username: string;
   bio?: string;
   followers: number;
   following: number;
@@ -22,13 +23,13 @@ interface Repository {
   id: number;
   name: string;
   stargazers_count: number;
-  html_url: string; 
-  updated_at: string; 
-  description?: string; 
+  html_url: string;
+  updated_at: string;
+  description?: string;
 }
 
 const Profile: React.FC = () => {
-  const router = useRouter(); 
+  const router = useRouter();
   const { username } = router.query; // Obtendo o parâmetro `username` da URL
   const [userData, setUserData] = useState<UserData | null>(null);
   const [repos, setRepos] = useState<Repository[]>([]);
